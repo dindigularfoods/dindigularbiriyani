@@ -3,15 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #FDFBF7;
+  --foreground: #2A0A0A;
 }
 
 body {
@@ -23,5 +16,17 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .shimmer-text {
+    @apply animate-pulse bg-clip-text text-transparent bg-gradient-to-r from-brand-gold via-white to-brand-gold;
+  }
+
+  .gold-border {
+    @apply border border-brand-gold/20 shadow-lg;
+  }
+
+  .interactive {
+    @apply cursor-pointer transition-all duration-300 active:scale-95;
   }
 }
