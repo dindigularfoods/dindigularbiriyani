@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
     Save, Plus, Trash2, RefreshCw, Upload,
     Loader2, MapPin, Globe,
-    Film, Play, MonitorPlay, LogOut
+    Film, Play, MonitorPlay
 } from "lucide-react";
 import { Header } from "@/components/Header";
 import { useAuth } from "@/components/AuthProvider";
@@ -64,20 +64,15 @@ export default function AdminPage() {
             const shopSnap = await getDocs(collection(db, "shops"));
             setShops(shopSnap.docs.map(doc => ({ id: doc.id, ...doc.data() } as Shop)));
 
-            // Fetch Gallery
+            // Fetch Gallery (Images AND Videos)
             const gallerySnap = await getDocs(collection(db, "gallery"));
-            // Filter images vs videos if needed, or store them in separate collections.
-            // For now, assuming "gallery" collection holds both or mixed.
             const allMedia = gallerySnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-            // Split into Gallery (Images) and Videos if your logic requires, 
-            // OR fetch from a separate "videos" collection if you made one. 
-            // Assuming simplified: Gallery holds images.
+            // 1. FIX: Filter Images
             setGallery(allMedia.filter((m: any) => m.type !== 'video') as GalleryItem[]);
 
-            // If you have a separate video collection, fetch it:
-            // const videoSnap = await getDocs(collection(db, "videos"));
-            // setVideos(videoSnap.docs.map(doc => ({ id: doc.id, ...doc.data() } as VideoItem)));
+            // 1. FIX: Filter Videos (This was missing before, now videos will show)
+            setVideos(allMedia.filter((m: any) => m.type === 'video') as VideoItem[]);
 
         } catch (_err) {
             showNotification('error', 'Registry unreachable');
@@ -120,7 +115,7 @@ export default function AdminPage() {
                 }
                 else if (type === 'video') {
                     setVideos(prev => prev.map(v => v.id === id ? { ...v, url: url } : v));
-                    // Assuming you might store videos in 'gallery' or separate 'videos'
+                    // Ensure we save type: 'video' so it loads correctly next time
                     if (!id.startsWith("temp-")) await updateDoc(doc(db, "gallery", id), { url: url, type: 'video' });
                 }
 
@@ -166,10 +161,9 @@ export default function AdminPage() {
             // Save Videos
             else if (activeTab === "VIDEOS") {
                 for (const vid of videos) {
-                    // For now, saving videos to 'gallery' collection with type='video' 
-                    // or use a separate collection if you prefer.
                     if (vid.id.startsWith("temp-")) {
                         const { id, ...data } = vid;
+                        // Save with type='video' and category='CINEMA'
                         await addDoc(collection(db, "gallery"), { ...data, type: 'video', category: 'CINEMA' });
                     } else {
                         const { id, ...data } = vid;
@@ -195,7 +189,10 @@ export default function AdminPage() {
             if (!id.startsWith("temp-")) await deleteDoc(doc(db, col, id));
 
             if (col === "shops") setShops(prev => prev.filter(s => s.id !== id));
-            else if (col === "gallery") setGallery(prev => prev.filter(g => g.id !== id));
+            else if (col === "gallery") {
+                setGallery(prev => prev.filter(g => g.id !== id));
+                setVideos(prev => prev.filter(v => v.id !== id));
+            }
 
             showNotification('success', 'Asset Deleted');
         } catch (e) { showNotification('error', 'Delete Failed'); }
@@ -220,7 +217,7 @@ export default function AdminPage() {
 
             <div className="container mx-auto px-8 max-w-6xl">
                 {/* Header Controls */}
-                <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-8">
+                <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-8">
                     <div className="flex items-center gap-6">
                         <div>
                             <h1 className="font-display text-5xl text-brand-burgundy uppercase tracking-tight leading-none">
@@ -232,7 +229,13 @@ export default function AdminPage() {
                                 ))}
                             </div>
                         </div>
-                        <button onClick={() => signOut(auth)} className="p-3 bg-brand-burgundy/5 rounded-2xl text-brand-burgundy/40 hover:text-red-600 transition-colors mt-12"><LogOut size={20} /></button>
+                        {/* 2. FIX: Logout Button (Text instead of Icon) */}
+                        <button
+                            onClick={() => signOut(auth)}
+                            className="px-6 py-2 bg-brand-burgundy/5 rounded-xl text-brand-burgundy/60 font-bold text-[9px] uppercase tracking-widest hover:bg-red-50 hover:text-red-600 transition-colors mt-12"
+                        >
+                            Logout
+                        </button>
                     </div>
 
                     <div className="flex gap-4">
@@ -243,16 +246,18 @@ export default function AdminPage() {
                             else setVideos([{ id, title: "Cinema Reel", url: "" }, ...videos]);
                         }} className="px-6 py-4 bg-white border border-brand-gold/30 text-brand-burgundy font-bold uppercase text-[10px] tracking-widest hover:bg-brand-gold rounded-2xl transition-all"><Plus size={16} className="inline mr-2" /> Add Asset</button>
                         <button onClick={commitChanges} disabled={isSaving} className="px-8 py-4 bg-brand-burgundy text-brand-ivory font-bold uppercase text-[10px] tracking-widest hover:bg-brand-gold transition-all rounded-2xl shadow-xl flex items-center gap-2">
-                            {isSaving ? <RefreshCw className="animate-spin" size={16} /> : <Save size={16} />} Sync Database
+                            {isSaving ? <RefreshCw className="animate-spin" size={16} /> : <Save size={16} />} Save Changes
                         </button>
                     </div>
                 </div>
 
                 {/* --- CONTENT: LOCATIONS --- */}
                 {activeTab === "LOCATIONS" && (
-                    <div className="space-y-6">
+                    // 3. FIX: Reduced spacing (space-y-4 instead of 6)
+                    <div className="space-y-4">
                         {shops.map((shop, idx) => (
-                            <motion.div layout key={shop.id} className="bg-white rounded-[2.5rem] p-8 border border-brand-gold/10 flex flex-col lg:flex-row gap-8 items-center group">
+                            // 3. FIX: Reduced padding (p-6 instead of 8)
+                            <motion.div layout key={shop.id} className="bg-white rounded-[2.5rem] p-6 border border-brand-gold/10 flex flex-col lg:flex-row gap-6 items-center group">
                                 {/* IMAGE UPLOADER */}
                                 <div className="relative w-40 h-32 rounded-2xl overflow-hidden bg-brand-burgundy/5 flex-shrink-0 border border-brand-gold/10">
                                     {shop.image ? <img src={shop.image} alt={shop.name} className="w-full h-full object-cover" /> : <div className="flex items-center justify-center h-full text-brand-burgundy/20"><Upload size={24} /></div>}
@@ -262,7 +267,8 @@ export default function AdminPage() {
                                     </label>
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 flex-grow w-full">
+                                {/* 3. FIX: Reduced gap (gap-6 instead of 8) */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow w-full">
                                     <div className="flex flex-col gap-2">
                                         <label className="text-[9px] font-bold text-brand-gold uppercase tracking-widest">Identity</label>
                                         <input value={shop.name} onChange={(e) => { const n = [...shops]; n[idx].name = e.target.value; setShops(n); }} className="bg-transparent border-b border-brand-gold/20 py-1 outline-none font-display text-2xl text-brand-burgundy" placeholder="Branch Name" />
@@ -294,8 +300,10 @@ export default function AdminPage() {
 
                 {/* --- CONTENT: GALLERY --- */}
                 {activeTab === "GALLERY" && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    // 3. FIX: Reduced grid gap (gap-4 instead of 6)
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {gallery.map((item, idx) => (
+                            // 3. FIX: Reduced padding (p-6 instead of p-6)
                             <motion.div layout key={item.id} className="bg-white p-6 rounded-[2.5rem] border border-brand-gold/10 flex gap-6 items-center group">
                                 <div className="relative w-32 h-32 rounded-2xl overflow-hidden bg-brand-burgundy/5 flex-shrink-0 border border-brand-gold/10">
                                     {item.url ? <img src={item.url} alt={item.caption} className="w-full h-full object-cover" /> : <div className="flex items-center justify-center h-full text-brand-burgundy/20"><Upload size={20} /></div>}
@@ -318,7 +326,8 @@ export default function AdminPage() {
 
                 {/* --- CONTENT: VIDEOS --- */}
                 {activeTab === "VIDEOS" && (
-                    <div className="space-y-6">
+                    // 3. FIX: Reduced spacing (space-y-4 instead of 6)
+                    <div className="space-y-4">
                         {videos.map((video, idx) => (
                             <AdminVideoItem key={video.id} video={video} idx={idx} videos={videos} setVideos={setVideos} handleFileUpload={handleFileUpload} uploadingIdx={uploadingIdx} onDelete={() => deleteItem(video.id, "gallery")} />
                         ))}
@@ -332,7 +341,8 @@ export default function AdminPage() {
 const AdminVideoItem = ({ video, idx, videos, setVideos, handleFileUpload, uploadingIdx, onDelete }: any) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     return (
-        <motion.div layout className="bg-white rounded-[2.5rem] p-8 border border-brand-gold/10 flex flex-col lg:flex-row gap-8 items-center group">
+        // 3. FIX: Reduced padding (p-6 instead of 8)
+        <motion.div layout className="bg-white rounded-[2.5rem] p-6 border border-brand-gold/10 flex flex-col lg:flex-row gap-6 items-center group">
             <div className="relative w-48 h-28 rounded-2xl overflow-hidden bg-brand-burgundy/5 flex-shrink-0 border border-brand-gold/10 flex items-center justify-center"
                 onMouseEnter={() => videoRef.current?.play()} onMouseLeave={() => { if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0; } }}>
                 {video.url ? <video ref={videoRef} src={video.url} muted className="w-full h-full object-cover" /> : <Film className="text-brand-gold/20" size={32} />}
@@ -343,7 +353,8 @@ const AdminVideoItem = ({ video, idx, videos, setVideos, handleFileUpload, uploa
                 </label>
                 <div className="absolute top-2 left-2 bg-brand-burgundy/80 p-1.5 rounded-lg text-white"><MonitorPlay size={14} /></div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 flex-grow w-full">
+            {/* 3. FIX: Reduced gap (gap-6 instead of 8) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow w-full">
                 <div className="flex flex-col gap-2">
                     <label className="text-[9px] font-bold text-brand-gold uppercase tracking-widest">Title</label>
                     <input value={video.title} onChange={(e) => { const n = [...videos]; n[idx].title = e.target.value; setVideos(n); }} className="bg-transparent border-b border-brand-gold/20 py-1 outline-none font-display text-2xl text-brand-burgundy" placeholder="Video Title" />

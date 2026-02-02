@@ -42,74 +42,87 @@ export const TheFootprint = () => {
                 </div>
             </div>
 
-            <div className="flex overflow-x-auto gap-6 px-8 md:px-16 no-scrollbar snap-x snap-mandatory pb-4">
-                {data.map((shop, idx) => (
-                    <motion.div
-                        key={shop.id || idx}
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: idx * 0.1 }}
-                        className="min-w-[280px] md:min-w-[380px] snap-center group relative bg-white rounded-[2rem] overflow-hidden border border-brand-gold/10 hover:border-brand-gold/40 transition-all duration-500 shadow-xl"
-                    >
-                        {/* Visual Asset */}
-                        <div className="relative h-56 w-full bg-gray-100">
-                            {shop.image ? (
-                                <img
-                                    src={shop.image}
-                                    alt={shop.name}
-                                    className={`w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 ${type === 'live' ? 'opacity-100' : 'opacity-40 grayscale'}`}
-                                />
-                            ) : (
-                                <div className="w-full h-full flex items-center justify-center bg-brand-burgundy/5 text-brand-burgundy/20">
-                                    <MapPin size={40} />
-                                </div>
-                            )}
-
-                            {type === 'next' && (
-                                <div className="absolute inset-0 bg-brand-burgundy/40 backdrop-blur-[2px] flex items-center justify-center">
-                                    <Sparkles className="text-brand-gold animate-pulse" size={32} />
-                                </div>
-                            )}
+            {/* RELATIVE WRAPPER ADDED FOR ARROW POSITIONING */}
+            <div className="relative group">
+                
+                {/* === NEW: SIDE ARROW INDICATOR === */}
+                {data.length > 1 && (
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20 pointer-events-none hidden md:flex">
+                        <div className="w-12 h-12 rounded-full bg-brand-gold/90 text-brand-burgundy shadow-2xl flex items-center justify-center animate-pulse border-2 border-brand-ivory">
+                            <ChevronRight size={28} />
                         </div>
+                    </div>
+                )}
 
-                        {/* Content & Actions */}
-                        <div className="p-8">
-                            <div className="flex justify-between items-start mb-2">
-                                <h4 className="font-display text-2xl text-brand-burgundy">{shop.name}</h4>
-                                {type === 'live' ? <Crown className="text-brand-gold" size={18} /> : <div className="text-[9px] font-bold text-brand-gold uppercase tracking-widest mt-1">Coming Soon</div>}
-                            </div>
-                            <p className="text-[10px] uppercase tracking-widest text-brand-burgundy/40 mb-8">{shop.sub}</p>
-
-                            <div className="flex gap-3">
-                                {type === 'live' ? (
-                                    <>
-                                        <a
-                                            href={shop.mapsLink || "#"}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex-1 flex items-center justify-center gap-2 py-3 bg-brand-burgundy/5 text-brand-burgundy rounded-xl text-[9px] font-bold uppercase tracking-widest hover:bg-brand-gold transition-colors"
-                                        >
-                                            <MapPin size={12} /> Directions
-                                        </a>
-                                        <a
-                                            href={shop.zomato || "#"}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex-1 flex items-center justify-center gap-2 py-3 bg-brand-burgundy text-brand-ivory rounded-xl text-[9px] font-bold uppercase tracking-widest hover:bg-brand-gold hover:text-brand-burgundy transition-colors"
-                                        >
-                                            <ShoppingBag size={12} /> Order
-                                        </a>
-                                    </>
+                <div className="flex overflow-x-auto gap-6 px-8 md:px-16 no-scrollbar snap-x snap-mandatory pb-4">
+                    {data.map((shop, idx) => (
+                        <motion.div
+                            key={shop.id || idx}
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: idx * 0.1 }}
+                            className="min-w-[280px] md:min-w-[380px] snap-center group relative bg-white rounded-[2rem] overflow-hidden border border-brand-gold/10 hover:border-brand-gold/40 transition-all duration-500 shadow-xl"
+                        >
+                            {/* Visual Asset */}
+                            <div className="relative h-56 w-full bg-gray-100">
+                                {shop.image ? (
+                                    <img
+                                        src={shop.image}
+                                        alt={shop.name}
+                                        className={`w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 ${type === 'live' ? 'opacity-100' : 'opacity-40 grayscale'}`}
+                                    />
                                 ) : (
-                                    <div className="w-full py-3 bg-brand-burgundy/5 text-center rounded-xl text-[9px] font-bold uppercase tracking-[0.3em] text-brand-burgundy/20 italic">
-                                        Preparing the Hearth
+                                    <div className="w-full h-full flex items-center justify-center bg-brand-burgundy/5 text-brand-burgundy/20">
+                                        <MapPin size={40} />
+                                    </div>
+                                )}
+
+                                {type === 'next' && (
+                                    <div className="absolute inset-0 bg-brand-burgundy/40 backdrop-blur-[2px] flex items-center justify-center">
+                                        <Sparkles className="text-brand-gold animate-pulse" size={32} />
                                     </div>
                                 )}
                             </div>
-                        </div>
-                    </motion.div>
-                ))}
+
+                            {/* Content & Actions */}
+                            <div className="p-8">
+                                <div className="flex justify-between items-start mb-2">
+                                    <h4 className="font-display text-2xl text-brand-burgundy">{shop.name}</h4>
+                                    {type === 'live' ? <Crown className="text-brand-gold" size={18} /> : <div className="text-[9px] font-bold text-brand-gold uppercase tracking-widest mt-1">Coming Soon</div>}
+                                </div>
+                                <p className="text-[10px] uppercase tracking-widest text-brand-burgundy/40 mb-8">{shop.sub}</p>
+
+                                <div className="flex gap-3">
+                                    {type === 'live' ? (
+                                        <>
+                                            <a
+                                                href={shop.mapsLink || "#"}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex-1 flex items-center justify-center gap-2 py-3 bg-brand-burgundy/5 text-brand-burgundy rounded-xl text-[9px] font-bold uppercase tracking-widest hover:bg-brand-gold transition-colors"
+                                            >
+                                                <MapPin size={12} /> Directions
+                                            </a>
+                                            <a
+                                                href={shop.zomato || "#"}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex-1 flex items-center justify-center gap-2 py-3 bg-brand-burgundy text-brand-ivory rounded-xl text-[9px] font-bold uppercase tracking-widest hover:bg-brand-gold hover:text-brand-burgundy transition-colors"
+                                            >
+                                                <ShoppingBag size={12} /> Order
+                                            </a>
+                                        </>
+                                    ) : (
+                                        <div className="w-full py-3 bg-brand-burgundy/5 text-center rounded-xl text-[9px] font-bold uppercase tracking-[0.3em] text-brand-burgundy/20 italic">
+                                            Preparing the Hearth
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
             </div>
         </div>
     );
@@ -143,4 +156,4 @@ export const TheFootprint = () => {
             </div>
         </section>
     );
-}; 
+};

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Header } from "@/components/Header";
 import { Loader2, Play, X, Image as ImageIcon } from "lucide-react";
 // 1. IMPORT FIREBASE
+import { Footer } from "@/components/Footer";
 import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -42,8 +43,8 @@ export default function GalleryPage() {
             <div className="container mx-auto px-8 relative z-10 pt-32 pb-20">
                 <div className="text-center mb-20">
                     <span className="text-brand-gold uppercase tracking-[0.5em] text-[10px] font-bold mb-4 block">Archive</span>
-                    <h1 className="font-display text-5xl md:text-8xl text-brand-ivory uppercase leading-none">
-                        Cherished   <span className="italic text-brand-gold">Moments</span>
+                    <h1 className="font-display text-5xl md:text-8xl text-brand-gold uppercase leading-none">
+                        Cherished  Moments
                     </h1>
                 </div>
 
@@ -88,8 +89,11 @@ export default function GalleryPage() {
                     </motion.div>
                 )}
             </AnimatePresence>
+            <Footer />
         </main>
+        
     );
+    
 }
 
 /* ---------------------- GalleryItem ---------------------- */
@@ -134,5 +138,6 @@ const GalleryItem = ({ item, onOpenVideo }: { item: any, onOpenVideo: (url: stri
                 <h3 className="text-brand-ivory font-display text-2xl uppercase leading-tight">{item.caption || "Untitled Moment"}</h3>
             </div>
         </motion.div>
+
     );
 };

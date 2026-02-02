@@ -23,8 +23,22 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "Dindigul AR Biryani | International Franchise Portal",
-  description: "Join the legacy of Dindigul AR Biryani. 18+ years of excellence. Explore exclusive franchise opportunities in the global culinary ecosystem.",
+  title: "Dindigul AR Biryani | Authentic Seeraga Samba Catering & Franchise",
+  
+  // DESCRIPTION: Includes "Tamil Nadu", "Wedding Catering", and "2008" to build trust
+  description: "Taste the legacy of Dindigul since 2008. We serve authentic Seeraga Samba Biryani across Tamil Nadu. Enquire today for premium wedding catering and franchise opportunities.",
+  
+  // KEYWORDS: Helps connect specific search terms to your site
+  keywords: [
+    "Dindigul Biryani", 
+    "Seeraga Samba", 
+    "Biryani Franchise", 
+    "Catering Service Tamil Nadu", 
+    "AR Biryani", 
+    "Wedding Catering", 
+    "Best Biryani Franchise"
+  ],
+  
 };
 
 export default function RootLayout({

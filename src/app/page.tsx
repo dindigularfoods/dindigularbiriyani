@@ -5,11 +5,11 @@ import { SpiceNebula } from "@/components/SpiceNebula";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { WhyUs } from "@/components/WhyUs";
-import { TheFootprint } from "@/components/Footprint"; // Ensure naming matches your export
+import { TheFootprint } from "@/components/Footprint"; 
 import { Tiers } from "@/components/Tiers";
 import { VideoShowcase } from "@/components/VideoShowcase";
 import { Footer } from "@/components/Footer";
-import { TasteUs } from "@/components/TasteUs"; // IMPORTED: TasteUs Component
+import { TasteUs } from "@/components/TasteUs"; 
 import { motion, AnimatePresence } from "framer-motion";
 import { useProspectus } from "@/context/ProspectusContext";
 import { ChevronRight } from "lucide-react";
@@ -18,13 +18,9 @@ export default function Home() {
   const { openProspectus } = useProspectus();
 
   // --- THE SCROLL GUARDIAN ---
-  // This effect listens for #TasteUs in the URL and forces a scroll
-  // after the components have a chance to render their data.
   useEffect(() => {
     const handleInitialScroll = () => {
       if (window.location.hash === "#TasteUs") {
-        // We use a small timeout to allow the TasteUs API fetch to complete
-        // and the DOM to calculate the correct height of the section.
         setTimeout(() => {
           const element = document.getElementById("TasteUs");
           if (element) {
@@ -33,7 +29,6 @@ export default function Home() {
         }, 800);
       }
     };
-
     handleInitialScroll();
   }, []);
 
@@ -48,14 +43,24 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          <Hero />
-          <WhyUs />
+          {/* 1. HERO SECTION */}
+          {/* We use z-0 so the next section can slide over its bottom edge */}
+          <div className="relative z-0">
+            <Hero />
+          </div>
+
+          {/* 2. THE FIX: Card Rise Effect */}
+          {/* -mt-10 pulls this white section UP over the bottom of the hero image */}
+          {/* rounded-t-[2.5rem] creates the smooth curved look instead of a hard line */}
+          <div className="relative z-10 bg-brand-ivory -mt-10 rounded-t-[2.5rem] pt-12 shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
+             <WhyUs />
+          </div>
 
           {/* THE FOOTPRINT (MAP SECTION) */}
           <TheFootprint />
 
           {/* TASTE US (LOCATIONS SECTION) */}
-
+          
 
           <div id="tiers" className="scroll-mt-24">
             <Tiers />

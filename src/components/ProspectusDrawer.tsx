@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Loader2 } from "lucide-react";
+import { X, Loader2, ChevronDown } from "lucide-react"; // 1. Imported ChevronDown
 
 interface Props {
     isOpen: boolean;
@@ -196,7 +196,7 @@ export const ProspectusDrawer = ({ isOpen, onClose }: Props) => {
 
                                 <div className="group">
                                     <label className="text-[10px] font-bold uppercase tracking-widest text-brand-burgundy/40 mb-2 block transition-colors group-focus-within:text-brand-gold">
-                                        Desired Location
+                                        Desired Location(the location you want to open the franchise)
                                     </label>
                                     <input
                                         type="text"
@@ -210,7 +210,8 @@ export const ProspectusDrawer = ({ isOpen, onClose }: Props) => {
                                     <div className="h-[1px] w-0 bg-brand-burgundy group-focus-within:w-full transition-all duration-500"></div>
                                 </div>
 
-                                <div className="group">
+                                {/* 2. MODIFIED: Added 'relative' and ChevronDown Icon */}
+                                <div className="group relative">
                                     <label className="text-[10px] font-bold uppercase tracking-widest text-brand-burgundy/40 mb-2 block transition-colors group-focus-within:text-brand-gold">
                                         Investment Capacity
                                     </label>
@@ -225,6 +226,10 @@ export const ProspectusDrawer = ({ isOpen, onClose }: Props) => {
                                         <option>The Signature (Experienced)</option>
                                         <option>The Premium (Large Scale)</option>
                                     </select>
+                                    <ChevronDown
+                                        size={16}
+                                        className="absolute right-0 bottom-3 text-brand-burgundy/40 pointer-events-none group-focus-within:text-brand-gold transition-colors"
+                                    />
                                     <div className="h-[1px] w-0 bg-brand-burgundy group-focus-within:w-full transition-all duration-500"></div>
                                 </div>
 
@@ -258,7 +263,7 @@ export const ProspectusDrawer = ({ isOpen, onClose }: Props) => {
                                             Alerting HQ...
                                         </>
                                     ) : (
-                                        "Request the Prospectus"
+                                        "Apply for Franchise"
                                     )}
                                 </button>
                             </form>

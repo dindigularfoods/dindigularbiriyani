@@ -49,7 +49,7 @@ const tierData = [
         button: "bg-brand-gold text-brand-burgundy",
         image: "/images/models/model-4.jpg",
         icon: <Globe className="w-8 h-8" />,
-        features: ["The Large Scale Model", "Premium Dine In", "2000+ Sq.Ft", "Seating 60+ people", "ROI 16-18 months"],
+        features: ["The Large Scale Model", "Premium Dine In", "Above 2000 Sq.Ft", "Seating 60 + people", "ROI 16-18 months"],
     }
 ];
 

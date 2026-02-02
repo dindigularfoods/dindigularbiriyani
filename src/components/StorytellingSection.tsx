@@ -70,18 +70,9 @@ const ChapterTwoStats = () => {
     }, [eventSpring, stateSpring]);
 
     return (
+        
         <div ref={ref} className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-12">
-            <div className="flex flex-col gap-2">
-                <div className="w-16 h-[1px] bg-brand-gold/60" />
-                <div className="flex flex-col">
-                    <span className="font-display text-4xl md:text-5xl text-brand-gold">
-                        {eventDisplay.toLocaleString()}+
-                    </span>
-                    <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-brand-ivory/60 mt-1">
-                        Events Catered
-                    </span>
-                </div>
-            </div>
+            {/* 1. Regional States (Now First) */}
             <div className="flex flex-col gap-2">
                 <div className="w-16 h-[1px] bg-brand-gold/60" />
                 <div className="flex flex-col">
@@ -90,6 +81,19 @@ const ChapterTwoStats = () => {
                     </span>
                     <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-brand-ivory/60 mt-1">
                         Regional States
+                    </span>
+                </div>
+            </div>
+
+            {/* 2. Events Catered (Now Second) */}
+            <div className="flex flex-col gap-2">
+                <div className="w-16 h-[1px] bg-brand-gold/60" />
+                <div className="flex flex-col">
+                    <span className="font-display text-4xl md:text-5xl text-brand-gold">
+                        {eventDisplay.toLocaleString()}+
+                    </span>
+                    <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-brand-ivory/60 mt-1">
+                        Events Catered
                     </span>
                 </div>
             </div>
@@ -140,14 +144,13 @@ export const StorytellingSection = () => {
 
                     <motion.div className="order-1 md:order-2 flex justify-center" initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 1.2 }}>
                         {/* SHAPE: Sovereign Foundation Bowl */}
-                        <div className="relative w-full max-w-sm aspect-[3/4] overflow-hidden border-4 border-brand-gold/60 rounded-b-[140px] rounded-t-[2rem] shadow-2xl">
-                            <img
-                                src="/images/chapter_2.jpeg"
-                                alt="Chapter 2 - The Catering Titan"
-                                /* CHANGED: Added object-[center_10%] to lower the image and show the full head */
-                                className="w-full h-full object-cover object-[center_10%] brightness-110"
+                        <div className="aspect-[2/3] relative overflow-hidden border-4 border-brand-gold/60 rounded-t-[140px] rounded-b-[2rem] shadow-2xl">
+                            <img 
+                                src="/images/chapter_2.jpeg" 
+                                alt="Chapter 2 - The Catering Titan" 
+                                className="w-full h-full object-cover object-top" 
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-brand-burgundy/40 to-transparent" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-brand-burgundy/60 to-transparent" />
                         </div>
                     </motion.div>
                 </div>
@@ -160,15 +163,16 @@ export const StorytellingSection = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         className="lg:col-span-7 relative"
                     >
-                        <div className="relative aspect-[4/3] w-full overflow-hidden border-4 border-brand-gold/60 rounded-[2rem] rounded-tr-[120px] rounded-bl-[120px] shadow-2xl">
+                       <div className="relative aspect-[4/5] w-full overflow-hidden border-4 border-brand-gold/60 rounded-[2rem] rounded-tr-[120px] rounded-bl-[120px] shadow-2xl">
                             <img
                                 src="/images/ar_hero_image.jpeg"
                                 alt="Chapter 3"
-                                /* CHANGED: Switched to object-[center_15%] to shift the image slightly lower */
-                                className="w-full h-full object-cover object-[center_15%]"
+                                className="w-full h-full object-cover object-[center_20%]"
                             />
                             <div className="absolute inset-0 bg-gradient-to-tr from-brand-burgundy/40 to-transparent" />
                         </div>
+
+                        
                         <div className="absolute -bottom-6 -left-6 w-32 h-32 border-b-4 border-l-4 border-brand-gold/20 -z-10" />
                     </motion.div>
 
@@ -188,7 +192,7 @@ export const StorytellingSection = () => {
                     <div className="max-w-4xl mx-auto">
                         <div className="grid md:grid-cols-2 gap-16 items-center">
                             <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2 }} className="relative">
-                                <div className="aspect-[3/4] relative border-4 border-brand-gold/40 overflow-hidden rounded-sm shadow-sovereign">
+                                <div className="aspect-[3/4] relative border-4 border-brand-gold/40 overflow-hidden rounded-[2.5rem] shadow-sovereign">
                                     <img src="/images/mujib.jpeg" alt="Portrait" className="w-full h-full object-cover" />
                                 </div>
                             </motion.div>
@@ -196,10 +200,10 @@ export const StorytellingSection = () => {
                                 <h3 className="font-display text-3xl md:text-5xl text-brand-gold mb-8 leading-tight">The Seal of Authenticity</h3>
                                 <div className="border-l-4 border-brand-gold pl-8 py-6 mb-12">
                                     <p className="font-display text-2xl md:text-3xl text-brand-gold tracking-wide mb-4">எப்போதும் உங்கள் அன்போடு</p>
-                                    <p className="font-serif italic text-xl md:text-2xl text-brand-gold/90">— திண்டுக்கல் AR ముజీబ్ ரஹ்மான்</p>
+                                    <p className="font-serif italic text-xl md:text-2xl text-brand-gold/90">— திண்டுக்கல் AR முஜீப்</p>
                                 </div>
                                 <p className="font-sans text-brand-ivory/70 text-sm leading-relaxed uppercase tracking-[0.2em] font-bold">
-                                    Founder & Chairman <br /> Dindigul AR Biryani <br /> Est. 2008
+                                    Founder & Chairman <br /> Dindigul AR Biriyani <br /> Est. 2008
                                 </p>
                             </motion.div>
                         </div>

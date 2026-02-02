@@ -18,13 +18,13 @@ export const WhyUs = () => {
     const { openProspectus } = useProspectus();
 
     return (
-       // Change this line:
-<section className="pt-32 pb-0 px-8 md:px-16 bg-brand-ivory relative overflow-hidden">
+        // Change this line:
+        <section className="pt-32 pb-0 px-8 md:px-16 bg-brand-ivory relative overflow-hidden">
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')]" />
 
             <div className="container mx-auto max-w-7xl relative z-10">
                 <div className="text-center mb-20">
-                    <span className="text-brand-bronze font-sans font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">Strategic Advantage</span>
+                    <span className="text-brand-bronze font-sans font-bold uppercase tracking-[0.4em] text-[12px] mb-4 block">Strategic Advantage</span>
                     <h2 className="font-display text-4xl md:text-5xl font-bold text-brand-burgundy mb-6 uppercase">Why Choose AR?</h2>
                     <div className="h-1 w-32 bg-brand-bronze mx-auto opacity-60" />
                 </div>
