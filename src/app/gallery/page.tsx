@@ -9,7 +9,7 @@ import { Footer } from "@/components/Footer";
 import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
-const categories = ["ALL", "FOOD", "AMBIENCE", "LEGACY", "CINEMA"];
+const categories = ["ALL", "FOOD", "AMBIENCE", "LEGACY", "VIDEOS"];
 
 export default function GalleryPage() {
     const [selectedCategory, setSelectedCategory] = useState("ALL");
@@ -42,16 +42,15 @@ export default function GalleryPage() {
             <Header />
             <div className="container mx-auto px-8 relative z-10 pt-32 pb-20">
                 <div className="text-center mb-20">
-                    <span className="text-brand-gold uppercase tracking-[0.5em] text-[10px] font-bold mb-4 block">Archive</span>
                     <h1 className="font-display text-5xl md:text-8xl text-brand-gold uppercase leading-none">
-                        Cherished  Moments
+                        Cherished Moments
                     </h1>
                 </div>
 
                 {/* Categories */}
-                <div className="flex flex-wrap justify-center gap-6 md:gap-12 mb-20">
+                <div className="flex flex-wrap justify-center gap-6 md:gap-12 mb-28">
                     {categories.map((cat) => (
-                        <button key={cat} onClick={() => setSelectedCategory(cat)} className={`relative text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-500 pb-2 ${selectedCategory === cat ? "text-brand-gold" : "text-brand-ivory/30 hover:text-brand-ivory"}`}>
+                        <button key={cat} onClick={() => setSelectedCategory(cat)} className={`relative text-[14px] font-bold uppercase tracking-[0.4em] transition-all duration-500 pb-2 ${selectedCategory === cat ? "text-brand-gold" : "text-brand-ivory/30 hover:text-brand-ivory"}`}>
                             {cat}
                             {selectedCategory === cat && <motion.div layoutId="underline" className="absolute bottom-0 left-0 w-full h-px bg-brand-gold" />}
                         </button>
@@ -61,7 +60,7 @@ export default function GalleryPage() {
                 {loading ? (
                     <div className="flex flex-col items-center py-40">
                         <Loader2 className="animate-spin text-brand-gold mb-4" />
-                        <span className="text-brand-ivory/40 text-[10px] uppercase tracking-widest font-bold">Loading Archive...</span>
+                        <span className="text-brand-ivory/40 text-[10px] uppercase tracking-widest font-bold">Loading our memories...</span>
                     </div>
                 ) : (
                     <>
@@ -91,9 +90,9 @@ export default function GalleryPage() {
             </AnimatePresence>
             <Footer />
         </main>
-        
+
     );
-    
+
 }
 
 /* ---------------------- GalleryItem ---------------------- */

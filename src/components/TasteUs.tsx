@@ -69,7 +69,7 @@ export const TasteUs = () => {
 
                     {/* RELATIVE WRAPPER FOR ARROW */}
                     <div className="relative group">
-                        
+
                         {/* === SIDE ARROW INDICATOR === */}
                         {shops.length > 1 && (
                             <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20 pointer-events-none hidden md:flex">
@@ -89,9 +89,10 @@ export const TasteUs = () => {
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ duration: 0.8, delay: i * 0.1 }}
-                                        className="min-w-[280px] md:min-w-[360px] snap-center bg-brand-ivory border border-brand-gold/10 overflow-hidden shadow-2xl flex flex-col group rounded-[2.5rem]"
+                                        // FIXED: Added border-4 and changed color to border-brand-gold
+                                        className="min-w-[280px] md:min-w-[360px] snap-center bg-brand-ivory border-4 border-brand-gold overflow-hidden shadow-2xl flex flex-col group rounded-[2.5rem]"
                                     >
-                                        <div className="relative h-[200px] md:h-[260px] overflow-hidden bg-gray-100">
+                                        <div className="relative h-[200px] md:h-[260px] overflow-hidden bg-gray-100 border-b border-brand-gold/20">
                                             {/* FIXED: Using standard img tag for Cloudinary compatibility */}
                                             <img
                                                 src={shop.image || "https://placehold.co/600x400/800000/FFF?text=Dindigul+AR"}
@@ -100,7 +101,7 @@ export const TasteUs = () => {
                                             />
                                             {!isOperational && (
                                                 <div className="absolute inset-0 bg-brand-burgundy/60 backdrop-blur-sm flex items-center justify-center">
-                                                    <span className="bg-brand-gold text-brand-burgundy px-5 py-2 font-bold text-[9px] tracking-[0.3em] uppercase rounded-full">
+                                                    <span className="bg-brand-gold text-brand-burgundy px-5 py-2 font-bold text-[12px] tracking-[0.3em] uppercase rounded-full">
                                                         Coming Soon
                                                     </span>
                                                 </div>

@@ -58,8 +58,7 @@ export const ProspectusDrawer = ({ isOpen, onClose }: Props) => {
         setStatus("submitting");
 
         try {
-            const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyjjPG1US-c5OKZ7sMbTmFsL7rejspXS5kXQSUtFYiOVCChKBOfTdpHm3PS-XiONH0z4A/exec";
-
+            const GOOGLE_SCRIPT_URL = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL || "";
             await fetch(GOOGLE_SCRIPT_URL, {
                 method: "POST",
                 mode: "no-cors",
@@ -235,7 +234,7 @@ export const ProspectusDrawer = ({ isOpen, onClose }: Props) => {
 
                                 <div className="group">
                                     <label className="text-[10px] font-bold uppercase tracking-widest text-brand-burgundy/40 mb-2 block transition-colors group-focus-within:text-brand-gold">
-                                        Message (Optional)
+                                        Message (Optional:- mention your experience in food industry)
                                     </label>
                                     <textarea
                                         name="message"

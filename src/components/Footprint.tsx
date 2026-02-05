@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { MapPin, Crown, Sparkles, ShoppingBag, ChevronRight } from "lucide-react";
 import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { SpiceNebula } from "@/components/SpiceNebula"; // 1. Added Import
 
 export const TheFootprint = () => {
     const [shops, setShops] = useState<any[]>([]);
@@ -62,10 +63,12 @@ export const TheFootprint = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
-                            className="min-w-[280px] md:min-w-[380px] snap-center group relative bg-white rounded-[2rem] overflow-hidden border border-brand-gold/10 hover:border-brand-gold/40 transition-all duration-500 shadow-xl"
+                            // 2. FIXED BORDER: Changed to border-4 border-brand-gold (Solid Gold)
+                            className="min-w-[280px] md:min-w-[380px] snap-center group relative bg-white rounded-[2rem] overflow-hidden border-4 border-brand-gold transition-all duration-500 shadow-xl"
                         >
                             {/* Visual Asset */}
-                            <div className="relative h-56 w-full bg-gray-100">
+                            {/* Added border-b for separation */}
+                            <div className="relative h-56 w-full bg-gray-100 border-b border-brand-gold/20">
                                 {shop.image ? (
                                     <img
                                         src={shop.image}
@@ -129,6 +132,10 @@ export const TheFootprint = () => {
 
     return (
         <section id="footprint" className="pt-24 pb-0 bg-brand-ivory relative overflow-hidden">
+
+            {/* 3. Added Spice Nebula */}
+
+
             <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/old-map.png')]" />
 
             <div className="container mx-auto relative z-10">

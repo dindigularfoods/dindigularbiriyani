@@ -1,18 +1,18 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { SpiceNebula } from "@/components/SpiceNebula";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { WhyUs } from "@/components/WhyUs";
-import { TheFootprint } from "@/components/Footprint"; 
+import { TheFootprint } from "@/components/Footprint";
+import { TasteUs } from "@/components/TasteUs";
 import { Tiers } from "@/components/Tiers";
 import { VideoShowcase } from "@/components/VideoShowcase";
 import { Footer } from "@/components/Footer";
-import { TasteUs } from "@/components/TasteUs"; 
 import { motion, AnimatePresence } from "framer-motion";
 import { useProspectus } from "@/context/ProspectusContext";
 import { ChevronRight } from "lucide-react";
+import { SpiceNebula } from "@/components/SpiceNebula";
 
 export default function Home() {
   const { openProspectus } = useProspectus();
@@ -49,31 +49,35 @@ export default function Home() {
             <Hero />
           </div>
 
-          {/* 2. THE FIX: Card Rise Effect */}
-          {/* -mt-10 pulls this white section UP over the bottom of the hero image */}
-          {/* rounded-t-[2.5rem] creates the smooth curved look instead of a hard line */}
-          <div className="relative z-10 bg-brand-ivory -mt-10 rounded-t-[2.5rem] pt-12 shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
-             <WhyUs />
+          {/* 2. THE CONTINUOUS SCROLL WRAPPER 
+             FIX: I moved <TheFootprint /> INSIDE this div.
+             Now 'WhyUs' and 'Footprint' share the same white background and shadow,
+             so the joining line completely disappears.
+          */}
+          <div className="relative z-10 bg-brand-ivory pt-12">
+            <WhyUs />
+            <TheFootprint />
           </div>
 
-          {/* THE FOOTPRINT (MAP SECTION) */}
-          <TheFootprint />
-
-          {/* TASTE US (LOCATIONS SECTION) */}
-          
 
           <div id="tiers" className="scroll-mt-24">
             <Tiers />
           </div>
 
           {/* JOIN THE LEGACY SECTION */}
-          <section className="py-32 bg-gradient-to-b from-brand-ivory to-brand-gold/5 text-center border-t border-brand-gold/10">
-            <div className="container mx-auto px-8">
+          {/* JOIN THE LEGACY SECTION */}
+          {/* Added 'relative' and 'overflow-hidden' to contain the spices */}
+          <section className="relative overflow-hidden py-32 bg-gradient-to-b from-brand-ivory to-brand-gold/5 text-center border-t border-brand-gold/10">
+            
+            {/* 1. Insert Spice Nebula Background */}
+            <SpiceNebula />
+
+            <div className="container mx-auto px-8 relative z-10">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="max-w-3xl mx-auto p-12 bg-white/80 backdrop-blur-md border-4 border-brand-bronze/60 rounded-[3rem] shadow-sovereign"
+                className="max-w-3xl mx-auto p-12 bg-white/80 backdrop-blur-md border-4 border-[#C5A059] rounded-[3rem] shadow-sovereign"
               >
                 <h3 className="font-display text-4xl md:text-5xl font-bold mb-8 text-brand-burgundy uppercase tracking-tight">
                   Join the <span className="text-brand-gold italic">Legacy</span>
@@ -94,7 +98,6 @@ export default function Home() {
               </motion.div>
             </div>
           </section>
-
           <VideoShowcase />
           <Footer />
         </motion.div>

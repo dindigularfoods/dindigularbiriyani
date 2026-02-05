@@ -10,10 +10,11 @@ const tierData = [
     {
         name: "Express",
         sub: "Urban Powerhouse",
-        // MODEL 1: Champagne Tan (Light)
-        theme: "bg-[#F4EBD0] text-brand-burgundy",
-        accent: "text-brand-bronze",
-        button: "bg-brand-burgundy text-brand-ivory",
+        // TIER 1: Porcelain Ivory
+        // Very light, clean start
+        theme: "bg-[#F9F5EA] text-brand-burgundy",
+        accent: "text-brand-burgundy/60",
+        button: "bg-brand-burgundy text-[#F9F5EA]",
         image: "/images/models/model-1.jpg",
         icon: <Store className="w-8 h-8" />,
         features: ["The Entry Level Model", "Take away and self service", "500-800 sq ft", "Seating 15-20 people", "ROI 8-10 months"],
@@ -21,10 +22,11 @@ const tierData = [
     {
         name: "Standard",
         sub: "The Heritage Suite",
-        // MODEL 2: Muted Gold/Tan
-        theme: "bg-[#D4B982] text-brand-burgundy",
+        // TIER 2: Vintage Cream
+        // A distinct step darker, warmer
+        theme: "bg-[#EBE0C5] text-brand-burgundy",
         accent: "text-brand-burgundy",
-        button: "bg-brand-burgundy text-brand-ivory",
+        button: "bg-brand-burgundy text-[#EBE0C5]",
         image: "/images/models/model-2.jpg",
         icon: <ChefHat className="w-8 h-8" />,
         features: ["The Mid Range Model", "Mini Dine In", "800-1200 Sq.Ft", "Seating 20-30 people", "ROI 10-12 months"],
@@ -32,10 +34,12 @@ const tierData = [
     {
         name: "Signature",
         sub: "Imperial Landmark",
-        // MODEL 3: Rich Umber/Cocoa (The missing bridge)
-        theme: "bg-[#5D4037] text-brand-ivory",
-        accent: "text-brand-gold",
-        button: "bg-brand-ivory text-[#5D4037]",
+        // TIER 3: Dark Sand
+        // The bridge between cream and gold
+        //theme: "bg-[#DBCFA6] text-brand-burgundy",
+        theme: "bg-[#DCC694] text-brand-burgundy",
+        accent: "text-brand-burgundy",
+        button: "bg-brand-burgundy text-[#DCC694]",
         image: "/images/models/model-3.jpg",
         icon: <Building2 className="w-8 h-8" />,
         features: ["The Elite Model", "Fine Dine In", "1200-2000 Sq.Ft", "Seating 35-50 people", "ROI 10-12 months"],
@@ -43,10 +47,11 @@ const tierData = [
     {
         name: "Premium",
         sub: "Global Flagship",
-        // MODEL 4: Deepest Burgundy/Roast (Darkest)
-        theme: "bg-brand-burgundy text-brand-gold",
-        accent: "text-brand-gold",
-        button: "bg-brand-gold text-brand-burgundy",
+        // TIER 4: Sovereign Gold
+        // The destination. Full Gold background.
+        theme: "bg-[#C5A059] text-brand-burgundy",
+        accent: "text-[#4A0404]", // Darker burgundy for contrast on gold
+        button: "bg-brand-burgundy text-[#C5A059]",
         image: "/images/models/model-4.jpg",
         icon: <Globe className="w-8 h-8" />,
         features: ["The Large Scale Model", "Premium Dine In", "Above 2000 Sq.Ft", "Seating 60 + people", "ROI 16-18 months"],

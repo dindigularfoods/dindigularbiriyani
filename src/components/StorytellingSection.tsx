@@ -70,7 +70,7 @@ const ChapterTwoStats = () => {
     }, [eventSpring, stateSpring]);
 
     return (
-        
+
         <div ref={ref} className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-12">
             {/* 1. Regional States (Now First) */}
             <div className="flex flex-col gap-2">
@@ -114,7 +114,7 @@ export const StorytellingSection = () => {
                     <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 1.2 }}>
                         {/* SHAPE: Deep Crown Arch (Rounded TL/TR) */}
                         <div className="aspect-[4/5] relative overflow-hidden border-4 border-brand-gold/60 rounded-t-[140px] rounded-b-[2rem] shadow-2xl">
-                            <img src="/images/chapter1-image copy.png" alt="Chapter 1" className="w-full h-full object-cover" />
+                            <img src="/images/chapter-1-final.jpeg" alt="Chapter 1" className="w-full h-full object-cover" />
                             <div className="absolute inset-0 bg-gradient-to-t from-brand-burgundy/60 to-transparent" />
                         </div>
                     </motion.div>
@@ -145,10 +145,10 @@ export const StorytellingSection = () => {
                     <motion.div className="order-1 md:order-2 flex justify-center" initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 1.2 }}>
                         {/* SHAPE: Sovereign Foundation Bowl */}
                         <div className="aspect-[2/3] relative overflow-hidden border-4 border-brand-gold/60 rounded-t-[140px] rounded-b-[2rem] shadow-2xl">
-                            <img 
-                                src="/images/chapter_2.jpeg" 
-                                alt="Chapter 2 - The Catering Titan" 
-                                className="w-full h-full object-cover object-top" 
+                            <img
+                                src="/images/chapter-2-final.jpeg"
+                                alt="Chapter 2 - The Catering Titan"
+                                className="w-full h-full object-cover object-top"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-brand-burgundy/60 to-transparent" />
                         </div>
@@ -163,7 +163,7 @@ export const StorytellingSection = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         className="lg:col-span-7 relative"
                     >
-                       <div className="relative aspect-[4/5] w-full overflow-hidden border-4 border-brand-gold/60 rounded-[2rem] rounded-tr-[120px] rounded-bl-[120px] shadow-2xl">
+                        <div className="relative aspect-[4/5] w-full overflow-hidden border-4 border-brand-gold/60 rounded-[2rem] rounded-tr-[120px] rounded-bl-[120px] shadow-2xl">
                             <img
                                 src="/images/ar_hero_image.jpeg"
                                 alt="Chapter 3"
@@ -172,7 +172,7 @@ export const StorytellingSection = () => {
                             <div className="absolute inset-0 bg-gradient-to-tr from-brand-burgundy/40 to-transparent" />
                         </div>
 
-                        
+
                         <div className="absolute -bottom-6 -left-6 w-32 h-32 border-b-4 border-l-4 border-brand-gold/20 -z-10" />
                     </motion.div>
 
@@ -192,8 +192,8 @@ export const StorytellingSection = () => {
                     <div className="max-w-4xl mx-auto">
                         <div className="grid md:grid-cols-2 gap-16 items-center">
                             <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2 }} className="relative">
-                                <div className="aspect-[3/4] relative border-4 border-brand-gold/40 overflow-hidden rounded-[2.5rem] shadow-sovereign">
-                                    <img src="/images/mujib.jpeg" alt="Portrait" className="w-full h-full object-cover" />
+                                <div className="relative border-4 border-brand-gold/40 overflow-hidden rounded-[2.5rem] shadow-sovereign">
+                                    <img src="/images/seal_replacement.jpeg" alt="Portrait" className="w-full h-full object-cover" />
                                 </div>
                             </motion.div>
                             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 1, delay: 0.3 }} className="text-left">

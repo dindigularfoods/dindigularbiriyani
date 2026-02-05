@@ -14,8 +14,8 @@ import { auth, db } from "@/lib/firebase";
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 
 // --- ☁️ CLOUDINARY KEYS ---
-const CLOUD_NAME = "drifdkued";
-const UPLOAD_PRESET = "dv80wc0d";
+const CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+const UPLOAD_PRESET = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
 // -------------------------
 
 /* --- Types & Interfaces --- */
@@ -94,7 +94,7 @@ export default function AdminPage() {
         setUploadingIdx(id);
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("upload_preset", UPLOAD_PRESET);
+        formData.append("upload_preset", UPLOAD_PRESET || "");
         const resourceType = file.type.includes("video") ? "video" : "image";
 
         try {
