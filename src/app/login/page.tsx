@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/lib/firebase";
-import { Loader2, Lock, AlertCircle, ArrowRight } from "lucide-react";
+import { Loader2, Lock, AlertCircle, ArrowRight, ArrowLeft } from "lucide-react"; // 1. Added ArrowLeft
+import Link from "next/link"; // 2. Imported Link
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -24,14 +25,11 @@ export default function LoginPage() {
 
             console.log("Login successful. Force navigating to /admin...");
 
-            // 2. FORCE NAVIGATION (The Fix)
-            // This forces the browser to load the Admin page fresh
+            // 2. FORCE NAVIGATION
             window.location.href = "/admin";
 
         } catch (err: any) {
             console.error("Login Error:", err);
-
-            // Readable Error Messages
             if (err.code === 'auth/invalid-credential' || err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') {
                 setError("Invalid Email or Password.");
             } else if (err.code === 'auth/too-many-requests') {
@@ -112,6 +110,18 @@ export default function LoginPage() {
                         )}
                     </button>
                 </form>
+
+                {/* 3. NEW: Return to Home Button */}
+                <div className="mt-8 text-center border-t border-brand-burgundy/10 pt-6">
+                    <Link
+                        href="/"
+                        className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brand-burgundy/40 hover:text-brand-burgundy transition-colors group"
+                    >
+                        <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" />
+                        Return to Home
+                    </Link>
+                </div>
+
             </div>
         </div>
     );

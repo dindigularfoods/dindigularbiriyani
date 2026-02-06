@@ -65,7 +65,7 @@ export const Footer = () => {
     const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
     return (
-        <footer 
+        <footer
             id="footer" // <--- Added ID here for Contact Tab navigation
             className="relative bg-brand-burgundy pt-16 pb-8 overflow-hidden border-t-2 border-brand-bronze/30"
         >
@@ -80,7 +80,7 @@ export const Footer = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     className="text-center mb-8"
                 >
-                    <span className="font-serif italic text-brand-gold/90 text-lg md:text-2xl tracking-wide">
+                    <span className="font-serif font-bold text-brand-gold/90 text-lg md:text-2xl tracking-wide">
                         நிகழ்வு எதுவாயினும் உணவு எங்களுடன்
                     </span>
                     <div className="h-px w-12 bg-brand-bronze/40 mx-auto mt-4" />

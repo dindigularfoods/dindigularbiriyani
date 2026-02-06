@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
     Save, Plus, Trash2, RefreshCw, Upload,
     Loader2, MapPin, Globe,
-    Film, Play, MonitorPlay
+    Film, Play, MonitorPlay, LogOut
 } from "lucide-react";
 import { Header } from "@/components/Header";
 import { useAuth } from "@/components/AuthProvider";
@@ -221,7 +221,7 @@ export default function AdminPage() {
                     <div className="flex items-center gap-6">
                         <div>
                             <h1 className="font-display text-5xl text-brand-burgundy uppercase tracking-tight leading-none">
-                                Executive <span className="text-brand-gold italic">Suite</span>
+                                Executive <span className="text-brand-gold ">Suite</span>
                             </h1>
                             <div className="flex gap-2 mt-6 p-1 bg-brand-burgundy/5 rounded-2xl border border-brand-gold/10">
                                 {(["LOCATIONS", "GALLERY", "VIDEOS"] as AdminTab[]).map((tab) => (
@@ -229,34 +229,35 @@ export default function AdminPage() {
                                 ))}
                             </div>
                         </div>
-                        {/* 2. FIX: Logout Button (Text instead of Icon) */}
-                        <button
-                            onClick={() => signOut(auth)}
-                            className="px-6 py-2 bg-brand-burgundy/5 rounded-xl text-brand-burgundy/60 font-bold text-[9px] uppercase tracking-widest hover:bg-red-50 hover:text-red-600 transition-colors mt-12"
-                        >
-                            Logout
-                        </button>
                     </div>
 
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 items-center">
                         <button onClick={() => {
                             const id = `temp-${Date.now()}`;
                             if (activeTab === "LOCATIONS") setShops([{ id, name: "New Location", sub: "District", status: "COMING SOON", image: "", zomato: "", mapsLink: "" }, ...shops]);
                             else if (activeTab === "GALLERY") setGallery([{ id, url: "", category: "FOOD", caption: "Photo Title" }, ...gallery]);
                             else setVideos([{ id, title: "Cinema Reel", url: "" }, ...videos]);
                         }} className="px-6 py-4 bg-white border border-brand-gold/30 text-brand-burgundy font-bold uppercase text-[10px] tracking-widest hover:bg-brand-gold rounded-2xl transition-all"><Plus size={16} className="inline mr-2" /> Add Asset</button>
+
                         <button onClick={commitChanges} disabled={isSaving} className="px-8 py-4 bg-brand-burgundy text-brand-ivory font-bold uppercase text-[10px] tracking-widest hover:bg-brand-gold transition-all rounded-2xl shadow-xl flex items-center gap-2">
                             {isSaving ? <RefreshCw className="animate-spin" size={16} /> : <Save size={16} />} Save Changes
+                        </button>
+
+                        {/* 1. MOVED LOGOUT BUTTON HERE */}
+                        <button
+                            onClick={() => signOut(auth)}
+                            className="ml-2 p-4 bg-brand-burgundy/5 rounded-2xl text-brand-burgundy/40 hover:bg-red-50 hover:text-red-600 transition-colors"
+                            title="Logout"
+                        >
+                            Logout
                         </button>
                     </div>
                 </div>
 
                 {/* --- CONTENT: LOCATIONS --- */}
                 {activeTab === "LOCATIONS" && (
-                    // 3. FIX: Reduced spacing (space-y-4 instead of 6)
                     <div className="space-y-4">
                         {shops.map((shop, idx) => (
-                            // 3. FIX: Reduced padding (p-6 instead of 8)
                             <motion.div layout key={shop.id} className="bg-white rounded-[2.5rem] p-6 border border-brand-gold/10 flex flex-col lg:flex-row gap-6 items-center group">
                                 {/* IMAGE UPLOADER */}
                                 <div className="relative w-40 h-32 rounded-2xl overflow-hidden bg-brand-burgundy/5 flex-shrink-0 border border-brand-gold/10">
@@ -267,7 +268,6 @@ export default function AdminPage() {
                                     </label>
                                 </div>
 
-                                {/* 3. FIX: Reduced gap (gap-6 instead of 8) */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow w-full">
                                     <div className="flex flex-col gap-2">
                                         <label className="text-[9px] font-bold text-brand-gold uppercase tracking-widest">Identity</label>
@@ -300,10 +300,8 @@ export default function AdminPage() {
 
                 {/* --- CONTENT: GALLERY --- */}
                 {activeTab === "GALLERY" && (
-                    // 3. FIX: Reduced grid gap (gap-4 instead of 6)
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {gallery.map((item, idx) => (
-                            // 3. FIX: Reduced padding (p-6 instead of p-6)
                             <motion.div layout key={item.id} className="bg-white p-6 rounded-[2.5rem] border border-brand-gold/10 flex gap-6 items-center group">
                                 <div className="relative w-32 h-32 rounded-2xl overflow-hidden bg-brand-burgundy/5 flex-shrink-0 border border-brand-gold/10">
                                     {item.url ? <img src={item.url} alt={item.caption} className="w-full h-full object-cover" /> : <div className="flex items-center justify-center h-full text-brand-burgundy/20"><Upload size={20} /></div>}
@@ -326,7 +324,6 @@ export default function AdminPage() {
 
                 {/* --- CONTENT: VIDEOS --- */}
                 {activeTab === "VIDEOS" && (
-                    // 3. FIX: Reduced spacing (space-y-4 instead of 6)
                     <div className="space-y-4">
                         {videos.map((video, idx) => (
                             <AdminVideoItem key={video.id} video={video} idx={idx} videos={videos} setVideos={setVideos} handleFileUpload={handleFileUpload} uploadingIdx={uploadingIdx} onDelete={() => deleteItem(video.id, "gallery")} />
@@ -341,7 +338,6 @@ export default function AdminPage() {
 const AdminVideoItem = ({ video, idx, videos, setVideos, handleFileUpload, uploadingIdx, onDelete }: any) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     return (
-        // 3. FIX: Reduced padding (p-6 instead of 8)
         <motion.div layout className="bg-white rounded-[2.5rem] p-6 border border-brand-gold/10 flex flex-col lg:flex-row gap-6 items-center group">
             <div className="relative w-48 h-28 rounded-2xl overflow-hidden bg-brand-burgundy/5 flex-shrink-0 border border-brand-gold/10 flex items-center justify-center"
                 onMouseEnter={() => videoRef.current?.play()} onMouseLeave={() => { if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0; } }}>
@@ -353,7 +349,6 @@ const AdminVideoItem = ({ video, idx, videos, setVideos, handleFileUpload, uploa
                 </label>
                 <div className="absolute top-2 left-2 bg-brand-burgundy/80 p-1.5 rounded-lg text-white"><MonitorPlay size={14} /></div>
             </div>
-            {/* 3. FIX: Reduced gap (gap-6 instead of 8) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow w-full">
                 <div className="flex flex-col gap-2">
                     <label className="text-[9px] font-bold text-brand-gold uppercase tracking-widest">Title</label>

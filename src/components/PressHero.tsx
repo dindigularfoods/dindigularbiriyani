@@ -44,15 +44,16 @@ export const PressHero = () => {
                                 பல ஆயிரம் இதயங்களை வென்ற கதை!
                             </h2>
 
-                            {/* Newspaper Photo */}
+                           
                             <div className="relative aspect-video mb-6 grayscale sepia-[0.3] brightness-95 overflow-hidden border border-brand-burgundy/10">
                                 <img
-                                    src="/images/mujib.jpeg"
+                                    src="/images/chapter3-image.jpeg"
                                     alt="AR Mujeeb Rahman Story"
                                     className="w-full h-full object-cover"
                                 />
                                 <div className="absolute inset-0 bg-brand-burgundy/5 mix-blend-multiply" />
                             </div>
+                            
 
                             {/* Article Body Snippet */}
                             <div className="space-y-4 text-xs md:text-sm leading-relaxed opacity-80 columns-1 md:columns-2 gap-6">

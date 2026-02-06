@@ -35,7 +35,7 @@ export const TheFootprint = () => {
                 <div className="flex items-center gap-4">
                     <div className={`w-2 h-2 rounded-full ${type === 'live' ? 'bg-green-500 animate-pulse' : 'bg-brand-gold'}`} />
                     <h3 className="font-display text-2xl md:text-3xl text-brand-burgundy uppercase tracking-tight">
-                        {title} <span className="text-brand-gold italic">({data.length})</span>
+                        {title} <span className="text-brand-gold">({data.length})</span>
                     </h3>
                 </div>
                 <div className="flex items-center gap-2 text-brand-burgundy/30 text-[10px] font-bold uppercase tracking-widest">
@@ -141,7 +141,7 @@ export const TheFootprint = () => {
             <div className="container mx-auto relative z-10">
                 <div className="mb-20 px-8 md:px-16">
                     <span className="text-brand-gold uppercase tracking-[0.5em] text-[10px] font-bold mb-4 block">Regional Presence</span>
-                    <h2 className="font-display text-4xl md:text-6xl text-brand-burgundy uppercase">The <span className="italic text-brand-gold">Footprint</span></h2>
+                    <h2 className="font-display text-4xl md:text-6xl text-brand-burgundy uppercase">The <span className="text-brand-gold">Footprint</span></h2>
                 </div>
 
                 {loading ? (

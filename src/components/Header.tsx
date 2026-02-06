@@ -6,13 +6,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { useProspectus } from "@/context/ProspectusContext"; // 1. Import Context
+import { useProspectus } from "@/context/ProspectusContext";
 
 export const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
-    const { openProspectus } = useProspectus(); // 2. Get open function
+    const { openProspectus } = useProspectus();
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -47,12 +47,14 @@ export const Header = () => {
                 </div>
 
                 <div className="flex flex-col items-start leading-tight">
-                    <span className={`font-serif text-[8px] md:text-[10px] font-bold tracking-[0.4em] uppercase transition-colors duration-500 ${isScrolled ? 'text-brand-gold' : 'text-brand-ivory/80'}`}>
+                    {/* 1. CHANGED: Always text-brand-gold (Removed conditional ivory) */}
+                    <span className="font-serif text-[8px] md:text-[10px] font-bold tracking-[0.4em] uppercase transition-colors duration-500 text-brand-gold">
                         Dindigul
                     </span>
                     <h1 className="font-display text-lg md:text-xl font-bold tracking-widest flex items-center gap-1">
                         <span className="text-brand-gold">AR</span>
-                        <span className={`transition-colors duration-500 ${isScrolled ? 'text-brand-gold' : 'text-brand-ivory'}`}>
+                        {/* 2. CHANGED: Always text-brand-gold */}
+                        <span className="transition-colors duration-500 text-brand-gold">
                             Biriyani
                         </span>
                     </h1>
@@ -66,9 +68,10 @@ export const Header = () => {
                         <Link
                             key={item.name}
                             href={item.href}
+                            // 3. CHANGED: Navigation links now stay Gold based (Gold/60 -> Ivory Hover) regardless of scroll
                             className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-500 ${pathname === item.href
                                     ? 'text-brand-gold'
-                                    : isScrolled ? 'text-brand-gold/60 hover:text-brand-ivory' : 'text-brand-ivory/60 hover:text-brand-gold'
+                                    : 'text-brand-gold/70 hover:text-brand-ivory'
                                 }`}
                         >
                             {item.name}
