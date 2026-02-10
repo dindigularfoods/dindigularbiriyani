@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { MapPin, Crown, Sparkles, ShoppingBag, ChevronRight } from "lucide-react";
 import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
-import { SpiceNebula } from "@/components/SpiceNebula"; // 1. Added Import
+import { SpiceNebula } from "@/components/SpiceNebula";
 
 export const TheFootprint = () => {
     const [shops, setShops] = useState<any[]>([]);
@@ -45,8 +45,8 @@ export const TheFootprint = () => {
 
             {/* RELATIVE WRAPPER ADDED FOR ARROW POSITIONING */}
             <div className="relative group">
-                
-                {/* === NEW: SIDE ARROW INDICATOR === */}
+
+                {/* === SIDE ARROW INDICATOR === */}
                 {data.length > 1 && (
                     <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20 pointer-events-none hidden md:flex">
                         <div className="w-12 h-12 rounded-full bg-brand-gold/90 text-brand-burgundy shadow-2xl flex items-center justify-center animate-pulse border-2 border-brand-ivory">
@@ -63,17 +63,16 @@ export const TheFootprint = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
-                            // 2. FIXED BORDER: Changed to border-4 border-brand-gold (Solid Gold)
                             className="min-w-[280px] md:min-w-[380px] snap-center group relative bg-white rounded-[2rem] overflow-hidden border-4 border-brand-gold transition-all duration-500 shadow-xl"
                         >
                             {/* Visual Asset */}
-                            {/* Added border-b for separation */}
                             <div className="relative h-56 w-full bg-gray-100 border-b border-brand-gold/20">
                                 {shop.image ? (
                                     <img
                                         src={shop.image}
                                         alt={shop.name}
-                                        className={`w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 ${type === 'live' ? 'opacity-100' : 'opacity-40 grayscale'}`}
+                                        // Removed opacity-40 and grayscale so the image is clear
+                                        className={`w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 ${type === 'live' ? 'opacity-100' : ''}`}
                                     />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center bg-brand-burgundy/5 text-brand-burgundy/20">
@@ -81,11 +80,7 @@ export const TheFootprint = () => {
                                     </div>
                                 )}
 
-                                {type === 'next' && (
-                                    <div className="absolute inset-0 bg-brand-burgundy/40 backdrop-blur-[2px] flex items-center justify-center">
-                                        <Sparkles className="text-brand-gold animate-pulse" size={32} />
-                                    </div>
-                                )}
+                                {/* --- REMOVED OVERLAY SECTION HERE --- */}
                             </div>
 
                             {/* Content & Actions */}
@@ -118,7 +113,7 @@ export const TheFootprint = () => {
                                         </>
                                     ) : (
                                         <div className="w-full py-3 bg-brand-burgundy/5 text-center rounded-xl text-[9px] font-bold uppercase tracking-[0.3em] text-brand-burgundy/20 italic">
-                                            Preparing the Hearth
+                                            Coming Soon
                                         </div>
                                     )}
                                 </div>
@@ -132,9 +127,6 @@ export const TheFootprint = () => {
 
     return (
         <section id="footprint" className="pt-24 pb-0 bg-brand-ivory relative overflow-hidden">
-
-            {/* 3. Added Spice Nebula */}
-
 
             <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/old-map.png')]" />
 

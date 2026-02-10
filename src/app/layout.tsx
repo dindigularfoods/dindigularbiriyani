@@ -23,22 +23,33 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "Dindigul AR Biryani | Authentic Seeraga Samba Catering & Franchise",
-  
+  title: "Dindigul AR Biryani | Authentic Dindigul Seeraga Samba Biryani and Franchise",
+
   // DESCRIPTION: Includes "Tamil Nadu", "Wedding Catering", and "2008" to build trust
   description: "Taste the legacy of Dindigul since 2008. We serve authentic Seeraga Samba Biryani across Tamil Nadu. Enquire today for premium wedding catering and franchise opportunities.",
-  
+
   // KEYWORDS: Helps connect specific search terms to your site
   keywords: [
-    "Dindigul Biryani", 
-    "Seeraga Samba", 
-    "Biryani Franchise", 
-    "Catering Service Tamil Nadu", 
-    "AR Biryani", 
-    "Wedding Catering", 
-    "Best Biryani Franchise"
+    // Core Brand (Updated Spelling to 'Biriyani')
+    "Dindigul Biriyani",
+    "AR Biriyani",
+    "Seeraga Samba Biriyani",
+    "Authentic Dindigul Biriyani",
+
+    // Franchise & Business 
+    "Biriyani Franchise",
+    "Best Biriyani Franchise",
+    "Restaurant Franchise Opportunities",
+    "Food Franchise India",
+    "Low Investment Food Franchise",
+    "Biriyani Business",
+
+    // Regional & Descriptive
+    "South Indian Cuisine",
+    "Tamil Nadu Biriyani",
+    "Top Rated Biriyani"
   ],
-  
+
 };
 
 export default function RootLayout({
