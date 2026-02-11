@@ -87,8 +87,7 @@ export const TheFootprint = () => {
                             <div className="p-8">
                                 <div className="flex justify-between items-start mb-2">
                                     <h4 className="font-display text-2xl text-brand-burgundy">{shop.name}</h4>
-                                    {type === 'live' ? <Crown className="text-brand-gold" size={18} /> : <div className="text-[9px] font-bold text-brand-gold uppercase tracking-widest mt-1">Coming Soon</div>}
-                                </div>
+                                    {type === 'live' && <Crown className="text-brand-gold" size={18} />}</div>
                                 <p className="text-[10px] uppercase tracking-widest text-brand-burgundy/40 mb-8">{shop.sub}</p>
 
                                 <div className="flex gap-3">
