@@ -111,7 +111,7 @@ export const TheFootprint = () => {
                                             </a>
                                         </>
                                     ) : (
-                                        <div className="w-full py-3 bg-brand-burgundy/5 text-center rounded-xl text-[9px] font-bold uppercase tracking-[0.3em] text-brand-burgundy/20 italic">
+                                        <div className="w-full py-3 bg-brand-burgundy/10 text-center rounded-xl text-sm font-bold uppercase tracking-widest text-brand-burgundy/75 italic">
                                             Coming Soon
                                         </div>
                                     )}
