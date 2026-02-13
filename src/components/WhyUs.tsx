@@ -73,14 +73,29 @@ export const WhyUs = () => {
                     ))}
                 </div>
 
-                <div className="mt-24 text-center">
+                <div className="mt-16 md:mt-24 text-center px-4">
                     <motion.button
                         onClick={openProspectus}
                         whileHover={{ scale: 1.05, backgroundColor: "#99732B", color: "#FFFFFF" }}
-                        className="px-16 py-6 bg-brand-burgundy text-brand-ivory text-[11px] font-bold uppercase tracking-[0.5em] rounded-full transition-all shadow-2xl"
+                        whileTap={{ scale: 0.95 }}
+                        className="
+            group
+            w-full md:w-auto
+            px-8 py-5 md:px-16 md:py-6 
+            bg-brand-burgundy 
+            text-brand-ivory 
+            text-xs md:text-sm 
+            font-extrabold 
+            uppercase 
+            tracking-[0.25em] md:tracking-[0.4em] 
+            rounded-full 
+            transition-all 
+            shadow-2xl
+            flex items-center justify-center gap-3 mx-auto
+        "
                     >
                         Franchise Enquiry
-                        <ChevronRight className="w-4 h-4 ml-4 inline-block" />
+                        <ChevronRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                     </motion.button>
                 </div>
             </div>
